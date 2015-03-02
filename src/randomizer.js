@@ -59,8 +59,9 @@ function setup(attrVal, slideObj, event, radEventName) {
     var randForKeys = {};
     slideObj.data.getRandomizerFor = function(key, fresh) {
         if(!randForKeys[key]) {
-            randForKeys[key].seed = (fresh ? '' : seed) + key;
-            randForKeys[key] = new Rng(randForKeys[key].seed);
+            var subseed = (fresh ? '' : seed) + key;
+            randForKeys[key] = new Rng(subseed);
+            randForKeys[key].seed = subseed;
         }
         return randForKeys[key];
     }
