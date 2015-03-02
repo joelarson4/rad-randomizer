@@ -263,8 +263,8 @@ function initialize(inputConfig, slides) {
 function getHeadingText(tag, slideObj) {
     var text = '';
     if(!tag) {
-        [1,2,3,4,5,6].forEach(function(number) {
-            text+=getHeadingText('h' + number, slideObj);
+        [1, 2, 3, 4, 5, 6].forEach(function(number) {
+            text += getHeadingText('h' + number, slideObj);
         });
         return text;
     } else {
@@ -289,7 +289,7 @@ function setup(attrVal, slideObj, event, radEventName) {
     } else if(attrVal === 'TEXT') {
         seed = (slideObj.element.textContent || slideObj.element.innerText);
     } else if(attrVal === 'RANDOM') {
-        seed = Math.random().toString();
+        seed = Math.random();
     } else if(!isNaN(parseFloat(attrVal))) {
         seed = parseFloat(attrVal);
     } else {
@@ -297,11 +297,13 @@ function setup(attrVal, slideObj, event, radEventName) {
     }
 
     slideObj.data.randomizer = new Rng(seed);
+    slideObj.data.randomizer.seed = seed;
     
     var randForKeys = {};
-    slideObj.data.getRandomizerFor = function(key) {
+    slideObj.data.getRandomizerFor = function(key, fresh) {
         if(!randForKeys[key]) {
-            randForKeys[key] = new Rng(seed + key);
+            randForKeys[key].seed = (fresh ? '' : seed) + key;
+            randForKeys[key] = new Rng(randForKeys[key].seed);
         }
         return randForKeys[key];
     }
