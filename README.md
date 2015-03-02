@@ -1,7 +1,9 @@
 #rad-randomizer [![Build Status](https://travis-ci.org/joelarson4/rad-randomizer.svg)](https://travis-ci.org/joelarson4/rad-randomizer)
 rad-randomizer is a [Reveal.js](http://lab.hakim.se/reveal-js/) [RadReveal](https://github.com/joelarson4/radReveal) add-on for attaching seeded PRNGs to your slides.
 
-<a href="http://joelarson4.github.io/radReveal/demo.html#/">Check out the demo slideshow</a> to see how rad-randomizer works.
+Check out the [demo slideshow](http://joelarson4.github.io/rad-randomizer/demo.html) to see what rad-randomizer can do.
+
+Check out [RadReveal](https://github.com/joelarson4/radReveal) to understand how these add-ons work.
 
 ##What does rad-randomizer do?
 
