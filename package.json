@@ -1,0 +1,35 @@
+{
+  "name": "rad-randomizer",
+  "version": "0.0.0",
+  "description": "Rad Randomizer is a RadReveal addon to attach predictable 'random' numbers to Reveal.js slides.",
+  "repository": {
+    "type": "git",
+    "url": "TODO"
+  },
+  "dependencies": {
+    "reveal.js": "3.0.0",
+    "rad-reveal": "0.0.4"
+  },
+  "devDependencies": {
+    "gulp-uglify": "~1.0.1",
+    "gulp-rename": "~1.2.0",
+    "gulp": "~3.8.9",
+    "gulp-mocha": "~1.1.1",
+    "chai": "~1.10.0",
+    "gulp-mocha-phantomjs": "~0.5.1",
+    "mocha": "~2.0.1",
+    "gulp-shell": "~0.2.11",
+    "del": "~1.1.1",
+    "gulp-concat": "~2.4.3",
+    "browserify": "8.0.0",
+    "vinyl-transform": "~1.0.0",
+    "gulp-jshint": "~1.9.2",
+    "rng-js": "git://github.com/skeeto/rng-js.git#b2efe15b66e5efa5dabaf2897ee0ae3ce5a7b30b"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "TODO"
+    }
+  ]
+}

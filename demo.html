@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>rad-reveal randomizer demo</title>
+
+        <meta name="description" content="rad-reveal randomizer demo, demonstrating randomizer">
+        <meta name="author" content="Joe Larson">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="node_modules/reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="node_modules/reveal.js/css/theme/simple.css" id="theme">
+
+    </head>
+
+    <body>
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>rad randomizer</h1>
+                    <h2>a RadReveal addon for Reveal.js</h2>
+                </section>
+
+                <section>
+                    <h2>What does it do?</h2>
+                    <p><strong>rad randomizer</strong> can add a 
+                        <br><a href="http://en.wikipedia.org/wiki/Pseudorandom_number_generator" target="_blank">seeded pseudo random number generater</a> (PRNG) 
+                        <br>to your slides.</p>
+                </section>
+
+                <section>
+                    <h2>Why would you want to?</h2>
+                    <p>You can use these PRNGs in other reveal.js add-ons to attach random seeming but predictable behaviors.</p>
+                    <p class="fragment">That can make your slideshow seem more interesting with less work!</p>
+                </section>
+
+                <section>
+                    <h2>How is do you use it?</h2>
+                    <p>Just add a <code>data-rad-randomizer</code> attribute with a non-blank value to any slide.</p>
+                    <p class="fragment">Those slide's <code>data</code> property will have a property <code>randomizer</code> attached.</p>
+                    <p class="fragment">That will be a <a href="https://github.com/skeeto/rng-js" target="_blank">Rng-js</a> object, which has a <code>random()</code> method that supplies a random seeming number.</p>
+                </section>
+
+                <section>
+                    <h2>What are the special values for <code>data-rad-randomizer</code>?</h2>
+                    <ul>
+                        <li><code>"TEXT"</code> will use the slide text as a seed.</li>
+                        <li class="fragment"><code>"HEADING"</code> uses text from all <code>h1 ... h6</code> tags as a seed.</li>
+                        <li class="fragment"><code>"H1"</code>...<code>"H6"</code> uses text from that tag.</li>
+                        <li class="fragment"><code>"HTML"</code> uses the slide html as a seed.</li>
+                        <li class="fragment"><code>"RANDOM"</code> uses a <code>Math.random()</code> as the seed (so it will change each reload).</li>
+                        <li class="fragment">If you supply a number, then that will be used as the seed.</li>
+                        <li class="fragment">Supply any other value, then that will be used as the seed.</li>
+                </section>
+
+                <section>
+                    <h2>So for example</h2>
+                    <p>Take a look  at the rest of these slides in view-source and see how they are using these special values
+                        to get repeatable lists of random seeming numbers.</p>
+                </section>
+
+                <section data-rad-randomizer="TEXT">
+                    <h2>Using value <code>"TEXT"</code></h2>
+                    <p>As long as the text of this slide doesn't change, the sequence of numbers won't either.</p>
+                </section>
+
+                <section data-rad-randomizer="HTML">
+                    <h2>Using value <code>"HTML"</code></h2>
+                    <p>As long as the html of this slide doesn't change, the sequence of numbers won't either.</p>
+                </section>
+
+                <section data-rad-randomizer="RANDOM">
+                    <h2>Using value <code>"RANDOM"</code></h2>
+                    <p>This sequence should be different every reload of the page.</p>
+                </section>
+
+                <section data-rad-randomizer="RANDOM">
+                    <h2>Using value <code>"RANDOM"</code></h2>
+                    <p>And also different than the last one.</p>
+                </section>
+
+                <section data-rad-randomizer="99">
+                    <h2>Using value <code>"99"</code></h2>
+                    <p>This sequence of numbers won't change unless we change the attribute value.</p>
+                </section>
+
+                <section data-rad-randomizer="Super">
+                    <h2>Using value <code>"Super"</code></h2>
+                    <p>This sequence of numbers won't change unless we change the attribute value.</p>
+                </section>
+
+                <section data-rad-randomizer="Super">
+                    <h2>Still using value <code>"Super"</code></h2>
+                    <p>And even though this slide's contents are totally different, the number sequence will be the same 
+                        since we used the same value.</p>
+                </section>
+
+                <section data-rad-randomizer="HEADING">
+                    <h2>Using value <code>"HEADING"</code></h2>
+                    <p>This sequence of numbers won't change unless we change the <code>h*</code> tag contents.</p>
+                </section>
+
+                <section data-rad-randomizer="HEADING">
+                    <h2>Using value <code>"HEADING"</code></h2>
+                    <p>Since the heading is the same as previous, the number sequence should match.</p>
+                </section>
+
+                <section data-rad-randomizer="H3">
+                    <h2>Using value <code>"H3"</code></h2>
+                    <h3>This is a subtitle</h3>
+                    <br>
+                    <p>The sequence here will be based on the subtitle,<br>which is in an <code>H3</code> tag.</p>
+                </section>
+
+                <section data-rad-randomizer="xyz" data-rad-functionrunner-setup='{ "func": "appendRandomFor", "args": [ "alpha", "beta" ] }'>
+                    <h2><code>getRandomizerFor()</code></h2>
+                    <p>You can also get a new custom randomizer within the slide for specific purposes.</p>
+                </section>
+
+                <section data-rad-randomizer="xyz" data-rad-functionrunner-setup='{ "func": "appendRandomFor", "args": [ "beta", "alpha" ] }'>
+                    <h2><code>getRandomizerFor()</code></h2>
+                    <p>Now reverse order, but still the same values</p>
+                </section>
+
+                <section data-rad-randomizer="the end">
+                    <h2>That's all folks</h2>
+                    <p>Happy randomizing!</p>
+                </section>
+        </div>
+
+        <script src="node_modules/reveal.js/lib/js/head.min.js"></script>
+        <script src="node_modules/reveal.js/js/reveal.js"></script>
+        <script src="node_modules/rad-reveal/build/radReveal.min.js"></script>
+        <script>
+            function getRandomString(randomizer) {
+                return randomizer.random(0, 1000) + ', ' + randomizer.random(0, 1000) + ', ' 
+                        + randomizer.random(0, 1000) + ', ' + randomizer.random(0, 1000);
+            }
+
+            function appendRandom(slideObj, event, radEventName) {
+                var attrVal = slideObj.element.getAttribute('data-rad-randomizer');
+                if(!attrVal) return;
+                slideObj.element.innerHTML += '<br>From data-rad-randomizer = "' + attrVal + '": ' 
+                    + getRandomString(slideObj.data.randomizer);
+            }
+
+            function appendRandomFor(randomKey1, randomKey2, slideObj, event, radEventName) {
+                [randomKey1, randomKey2].forEach(function(randomKey) {
+                    var randomizer = slideObj.data.getRandomizerFor(randomKey);
+                    slideObj.element.innerHTML += '<br>From randomizerFor = "' + randomKey + '": ' 
+                        + getRandomString(randomizer);
+                });
+            }
+
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+
+                dependencies: [
+                    { src: 'build/randomizer.js', radName: 'randomizer' },
+                    { src: 'node_modules/rad-reveal/build/functionRunner.js', radName: 'functionRunner', radConfig: {
+                        fillSlides: { setup: { "func" : "appendRandom" } }
+                    } }
+                ]
+            });
+
+            require('rad-reveal').initialize();
+
+            //run tests if "test" is a url or path parameter, e.g. "demo.html?test"
+            head.js('node_modules/rad-reveal/test/maybeTest.js?test=test/demoTests.js');
+        </script>
+    </body>
+</html>
