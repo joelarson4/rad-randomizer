@@ -1,6 +1,6 @@
 {
   "name": "rad-randomizer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Rad Randomizer is a RadReveal addon to attach predictable 'random' numbers to Reveal.js slides.",
   "repository": {
     "type": "git",
