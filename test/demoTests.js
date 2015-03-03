@@ -39,9 +39,9 @@ describe('rad-randomizer tests', function() {
         });
     });
 
-    it('check that HEADING value reflects heading', function() { 
+    it('check that HEADINGS value reflects heading', function() { 
         slides.forEach(function(slide) {
-            if(slide.element.hasAttribute('data-rad-randomizer') !== 'HEADING') { return; }
+            if(slide.element.hasAttribute('data-rad-randomizer') !== 'HEADINGS') { return; }
             //in the demos where HEADING used, the only heading tag is h2
             var h2ele = slide.element.querySelector('h2');
             var h2Text = h2ele.textContent || h2ele.innerText
