@@ -40,7 +40,7 @@ function setup(attrVal, slideObj, event, radEventName) {
     if(attrVal === 'HTML') {
         seed = slideObj.element.innerHTML;
     } else if(attrVal === 'HEADINGS') {
-        seed = getHeadings('*', slideObj);
+        seed = getHeadingText(null, slideObj);
     } else if(typeof attrVal == 'string' && attrVal.length == 2 && attrVal.charAt(0) == 'H') {
         seed = getHeadingText(attrVal, slideObj);
     } else if(attrVal === 'TEXT') {
