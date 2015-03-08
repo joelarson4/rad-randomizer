@@ -241,13 +241,47 @@ RNG.$ = new RNG();
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],"/Users/larsonj/Sites/radReveal/rad-randomizer/src/randomizer.js":[function(require,module,exports){
+/*!
+ * rad-randomizer
+ * http://joelarson4.github.io/rad-randomizer
+ * MIT licensed
+ *
+ * Copyright (C) 2015 Joe Larson
+ */
+
+/** 
+ * @overview
+ * rad-randomizer is a Reveal.js RadReveal add-on for attaching seeded PRNGs to your slides.
+ * Please see [project README](https://github.com/joelarson4/rad-randomizer) for an overview.
+ *
+ * This is not a true CommonJS module, you cannot `require()` it.  It should be loaded as a Reveal.js dependency.
+ *
+ *```javascript
+ * Reveal.initialize({
+ *    ...
+ *    dependencies: [
+ *        { src: '<some path>/randomizer.min.js', radName: 'randomizer' }
+ *    ...
+ *```
+ *
+ * @module randomizer
+ */
+
+//Developer note: we are not using jsdox to generate any markdown for this file; the API doesn't really suit it.  
+//  JsDoc still provided for developer use
+
 var RadReveal = require('rad-reveal');
 var Rng = require('../node_modules/rng-js');
 
 var config;
 
-////
-
+/** 
+ * Runs when RadReveal initializes. 
+ *
+ * @param {object} config - configuration object set in radConfig
+ * @param {array} slides - all the slide objects
+ * @private
+ */
 function initialize(inputConfig, slides) {
     config = inputConfig || {};
 
@@ -260,23 +294,40 @@ function initialize(inputConfig, slides) {
     }
 }
 
+
+/** 
+ * Used to get a concat string of heading text.
+ *
+ * @param {string} tag - if blank, then h1..h6 are used, otherwise it is a tag name.
+ * @param {object} slideObj - the RadReveal slide object 
+ * @return {string} all the text that matched, joined with a '; ' between each tag's text.
+ * @private
+ */
 function getHeadingText(tag, slideObj) {
-    var text = '';
+    var text = [];
     if(!tag) {
         [1, 2, 3, 4, 5, 6].forEach(function(number) {
-            text += getHeadingText('h' + number, slideObj);
+            text.push(getHeadingText('h' + number, slideObj));
         });
-        return text;
     } else {
         var tagElements = Array.prototype.slice.apply(slideObj.element.querySelectorAll(tag));
         tagElements.forEach(function(element) {
-            text += '; ' + (element.textContent || element.innerText);
+            text.push((element.textContent || element.innerText));
         });
-        return text;
     }
+    return text.join('; ');
 }
 
-function setup(attrVal, slideObj, event, radEventName) {
+/** 
+ * Runs when RadReveal initializes for each slide with a matching attribute.
+ *
+ * @param {string} attrVal - value of the attribute
+ * @param {object} slideObj - the RadReveal slide object (see RadReveal documentation)
+ * @param {object} event - the Reveal.js event
+ * @param {string} radEventName - the name of the RadReveal event (see RadReveal documentation)
+ * @private
+ */
+function load(attrVal, slideObj, event, radEventName) {
     var seed;
 
     //first get the seed value
@@ -296,9 +347,11 @@ function setup(attrVal, slideObj, event, radEventName) {
         seed = attrVal;
     }
 
+    //now create and attach the rng
     slideObj.data.randomizer = new Rng(seed);
     slideObj.data.randomizer.seed = seed;
     
+    //and attach the getRandomizerFor function
     var randForKeys = {};
     slideObj.data.getRandomizerFor = function(key, fresh) {
         if(!randForKeys[key]) {
@@ -310,13 +363,8 @@ function setup(attrVal, slideObj, event, radEventName) {
     }
 }
 
-RadReveal.register({
-    name: 'randomizer',
-    initialize: initialize,
-    attributeEventListeners: {
-        'data-rad-randomizer': {
-            setup: setup
-        }
-    }
-});
+//register randomizer
+RadReveal.register('randomizer', initialize);
+RadReveal.on('data-rad-randomizer', 'load', load);
+
 },{"../node_modules/rng-js":1,"rad-reveal":"rad-reveal"}]},{},["/Users/larsonj/Sites/radReveal/rad-randomizer/src/randomizer.js"]);

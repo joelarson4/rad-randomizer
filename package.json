@@ -1,6 +1,6 @@
 {
   "name": "rad-randomizer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "rad-randomizer is a Reveal.js RadReveal add-on for attaching seeded PRNGs to your slides",
   "main": "build/randomizer",
   "repository": {
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "reveal.js": "3.0.0",
-    "rad-reveal": "0.0.4"
+    "rad-reveal": "0.0.5"
   },
   "devDependencies": {
     "gulp-uglify": "~1.0.1",
