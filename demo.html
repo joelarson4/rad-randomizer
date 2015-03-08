@@ -120,12 +120,12 @@
                     <p>The sequence here will be based on the subtitle,<br>which is in an <code>H3</code> tag.</p>
                 </section>
 
-                <section data-rad-randomizer="xyz" data-rad-functionrunner-setup='{ "func": "appendRandomFor", "args": [ "alpha", "beta" ] }'>
+                <section data-rad-randomizer="xyz" data-rad-functionrunner-load='{ "func": "appendRandomFor", "args": [ "alpha", "beta" ] }'>
                     <h2><code>getRandomizerFor()</code></h2>
                     <p>You can also get a new custom randomizer within the slide for specific purposes.</p>
                 </section>
 
-                <section data-rad-randomizer="xyz" data-rad-functionrunner-setup='{ "func": "appendRandomFor", "args": [ "beta", "alpha" ] }'>
+                <section data-rad-randomizer="xyz" data-rad-functionrunner-load='{ "func": "appendRandomFor", "args": [ "beta", "alpha" ] }'>
                     <h2><code>getRandomizerFor()</code></h2>
                     <p>Now reverse order, but still the same values</p>
                 </section>
@@ -146,6 +146,7 @@
             }
 
             function appendRandom(slideObj, event, radEventName) {
+                console.log('??');
                 var attrVal = slideObj.element.getAttribute('data-rad-randomizer');
                 if(!attrVal) return;
                 slideObj.element.innerHTML += '<br>From data-rad-randomizer = "' + attrVal + '": ' 
@@ -168,7 +169,7 @@
                 dependencies: [
                     { src: 'build/randomizer.min.js', radName: 'randomizer' },
                     { src: 'node_modules/rad-reveal/build/functionRunner.min.js', radName: 'functionRunner', radConfig: {
-                        fillSlides: { setup: { "func" : "appendRandom" } }
+                        fillSlides: { load: { "func" : "appendRandom" } }
                     } }
                 ]
             });
