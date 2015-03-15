@@ -11,9 +11,31 @@ rad-randomizer can add a seeded pseudo random number generater (PRNG) to your sl
 You can use these PRNGs in other reveal.js add-ons to attach random seeming but predictable behaviors.
 That can make your slideshow seem more interesting with less work!
 
-##How is do you use it?
+##How do you use it?
 
-Just add a `data-rad-randomizer` attribute with a non-blank value to any slide.
+First you'll need to add [RadReveal](https://github.com/joelarson4/radReveal) to your slideshow.
+
+Then you will need to intall the `rad-randomizer` script:
+
+    cd <the root of your slideshow directory>
+    npm install rad-randomizer
+
+Then you will need to load the `rad-randomizer` script as a Reveal.js dependency:    
+
+```javascript
+Reveal.initialize({
+  ...normal Reveal configuration goes here
+  dependencies: [
+    { src: 'node_modules/rad-randomizer/build/randomizer.js', radName: 'colorizer', radConfig: { palette: 'standard' } }
+    ...other dependencies go here
+  ]
+});
+
+var RadReveal = require('rad-reveal');
+RadReveal.initialize();
+```
+
+Finally, just add a `data-rad-randomizer` attribute with a non-blank value to any slide.
 Those slide's `data` property will have a property `randomizer` attached.
 That will be a [Rng-js](https://github.com/skeeto/rng-js) object, which has a `random()` method that supplies a random 
 seeming number based on a seed.
