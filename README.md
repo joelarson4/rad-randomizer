@@ -26,7 +26,7 @@ Then you will need to load the `rad-randomizer` script as a Reveal.js dependency
 Reveal.initialize({
   ...normal Reveal configuration goes here
   dependencies: [
-    { src: 'node_modules/rad-randomizer/build/randomizer.js', radName: 'colorizer', radConfig: { palette: 'standard' } }
+    { src: 'node_modules/rad-randomizer/build/randomizer.js', radName: 'randomizer' }
     ...other dependencies go here
   ]
 });
